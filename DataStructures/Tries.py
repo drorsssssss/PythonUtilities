@@ -1,3 +1,5 @@
+import pytest
+
 # Define Trie Node class
 
 class TrieNode():
@@ -80,6 +82,27 @@ class Trie():
             return 0
         else:
             return 0
+
+class TestTries():
+    def __init__(self):
+        self.tr=Trie()
+
+
+
+
+    def test_insert(self):
+        word="dror"
+        self.tr.insert(word)
+        h=self.tr.getTrieRoot()
+        c=0
+        for i in word:
+            if i in h.children:
+                c+=1
+                h=h.children[i]
+            else:
+                break
+
+        assert c == 4
 
 
 
