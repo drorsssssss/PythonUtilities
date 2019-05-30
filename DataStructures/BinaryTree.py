@@ -39,24 +39,104 @@ class BinaryTree:
     def __printTree(self,base):
         if base:
             self.__printTree(base.left)
-            if base is not None:
-                print(base.data)
+            print(base.data, end=" ")
             self.__printTree(base.right)
 
+    # PreOrder printing
+    def printTreePreOrder(self):
+        self.__printTreePreOrder(self.root)
+
+    def __printTreePreOrder(self,base):
+        if base:
+            print(base.data, end=" ")
+            self.__printTreePreOrder(base.left)
+            self.__printTreePreOrder(base.right)
+
+
+    def sum(self):
+        return self.__sum(self.root)
+
+    def __sum(self,base):
+        if base:
+            left = self.__sum(base.left)
+            right = self.__sum(base.right) + base.data
+            return left + right
+        else:
+            return 0
+
+    def count(self):
+        return self.__count(self.root)
+
+    def __count(self,base):
+        if base:
+            return self.__count(base.left) + self.__count(base.right) +1
+        else:
+            return 0
+
+    def isExist(self,data):
+        return True if self.__isExist(self.root,data)>0 else False
+
+    def __isExist(self,base,data):
+        left=0
+        right=0
+        if base:
+            if base.data==data:
+                return 1
+            if data<base.data:
+                left = self.__isExist(base.left,data)
+            if data>base.data:
+                right = self.__isExist(base.right,data)
+            return left + right
+        else:
+            return 0
 
 
 class TestBinaryTree:
     def __init__(self):
         self.root=BinaryTree()
 
-    def test_insert(self):
+    def test_display_inorder(self):
         self.root.insert(1)
         self.root.insert(3)
         self.root.insert(2)
         self.root.insert(10)
         self.root.insert(8)
         print("InOrder display")
+        print("Should be: 1,2,3,8,10")
+        print("Result: ",end=" ")
         self.root.printTree()
 
+    def test_display_preorder(self):
+        self.root.insert(1)
+        self.root.insert(3)
+        self.root.insert(2)
+        self.root.insert(10)
+        self.root.insert(8)
+        print("PreOrder display")
+        print("Should be: 1,2,3,8,10")
+        print("Result: ",end=" ")
+        self.root.printTree()
 
-        
+    def test_sum(self):
+        self.root.insert(1)
+        self.root.insert(3)
+        self.root.insert(2)
+        self.root.insert(10)
+        self.root.insert(8)
+        assert self.root.sum() == 24
+
+    def test_count(self):
+        self.root.insert(1)
+        self.root.insert(3)
+        self.root.insert(2)
+        self.root.insert(10)
+        self.root.insert(8)
+        assert self.root.count() == 5
+
+    def test_isExist(self):
+        self.root.insert(1)
+        self.root.insert(3)
+        self.root.insert(2)
+        self.root.insert(10)
+        self.root.insert(8)
+        assert self.root.isExist(1) == True
