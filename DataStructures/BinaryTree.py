@@ -91,52 +91,58 @@ class BinaryTree:
             return 0
 
 
-class TestBinaryTree:
-    def __init__(self):
-        self.root=BinaryTree()
 
-    def test_display_inorder(self):
-        self.root.insert(1)
-        self.root.insert(3)
-        self.root.insert(2)
-        self.root.insert(10)
-        self.root.insert(8)
-        print("InOrder display")
-        print("Should be: 1,2,3,8,10")
-        print("Result: ",end=" ")
-        self.root.printTree()
+# Unit Testing
+def test_display_inorder():
+    root=BinaryTree()
+    root.insert(1)
+    root.insert(3)
+    root.insert(2)
+    root.insert(10)
+    root.insert(8)
+    print("InOrder display")
+    print("Should be: 1,2,3,8,10")
+    print("Result: ",end=" ")
+    root.printTree()
 
-    def test_display_preorder(self):
-        self.root.insert(1)
-        self.root.insert(3)
-        self.root.insert(2)
-        self.root.insert(10)
-        self.root.insert(8)
-        print("PreOrder display")
-        print("Should be: 1,2,3,8,10")
-        print("Result: ",end=" ")
-        self.root.printTree()
 
-    def test_sum(self):
-        self.root.insert(1)
-        self.root.insert(3)
-        self.root.insert(2)
-        self.root.insert(10)
-        self.root.insert(8)
-        assert self.root.sum() == 24
+def test_display_preorder():
+    root=BinaryTree()
+    root.insert(1)
+    root.insert(3)
+    root.insert(2)
+    root.insert(10)
+    root.insert(8)
+    print("PreOrder display")
+    print("Should be: 1,2,3,8,10")
+    print("Result: ",end=" ")
+    root.printTree()
 
-    def test_count(self):
-        self.root.insert(1)
-        self.root.insert(3)
-        self.root.insert(2)
-        self.root.insert(10)
-        self.root.insert(8)
-        assert self.root.count() == 5
+def test_sum():
+    root=BinaryTree()
+    root.insert(1)
+    root.insert(3)
+    root.insert(2)
+    root.insert(10)
+    root.insert(8)
+    assert root.sum() == 24
 
-    def test_isExist(self):
-        self.root.insert(1)
-        self.root.insert(3)
-        self.root.insert(2)
-        self.root.insert(10)
-        self.root.insert(8)
-        assert self.root.isExist(1) == True
+def test_count():
+    root=BinaryTree()
+    root.insert(1)
+    root.insert(3)
+    root.insert(2)
+    root.insert(10)
+    root.insert(8)
+    assert root.count() == 5
+
+def test_isExist():
+    root=BinaryTree()
+    root.insert(1)
+    root.insert(3)
+    root.insert(2)
+    root.insert(10)
+    root.insert(8)
+    assert root.isExist(1) == True
+
+pytest.main(["-rA"])
