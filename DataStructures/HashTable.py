@@ -14,15 +14,15 @@ class HashTable:
             sum+=ord(char)
         return sum
 
-    def hashingFunc(self,key):
-        return self.getAsciiVal(key) % len(self.arr)
+    def hashingFunc(self,arr,key):
+        return self.getAsciiVal(key) % len(arr)
 
     def insert(self,key,value):
 
         print(f"Load factor: {self.loadFactor()}")
         if self.loadFactor()>=0.75:
-            self.arr.extend([kv() for _ in range(len(self.arr))])
-        index = self.hashingFunc(key)
+            self.resize()
+        index = self.hashingFunc(self.arr,key)
         i=1
         while ((self.arr[index].key!=None and self.arr[index].key!=key) and i<=len(self.arr)):
             index=(index+pow(i,2)) % len(self.arr)
@@ -36,7 +36,7 @@ class HashTable:
             print(f"({index.key},{index.value})", end=" ")
 
     def get(self,key):
-        index=self.hashingFunc(key)
+        index=self.hashingFunc(self.arr,key)
         i=1
         while (self.arr[index].key!=key and i<=len(self.arr)):
             index=(index+pow(i,2)) % len(self.arr)
@@ -45,6 +45,26 @@ class HashTable:
 
     def loadFactor(self):
         return 1.0*self.numElements/len(self.arr)
+
+    def resize(self):
+        new_arr=[kv() for _ in range(2*len(self.arr))]
+        for index in self.arr:
+            hash_index = self.hashingFunc(new_arr,index.key)
+            i=0
+            while ((new_arr[hash_index].key!=None and new_arr[hash_index].key!=index.key) and i<=len(new_arr)):
+                hash_index=(hash_index+pow(i,2)) % len(new_arr)
+                i+=1
+
+            new_arr[hash_index].key=index.key
+            new_arr[hash_index].value=index.value
+        print("start resize")
+        for i in new_arr:
+            print(f"({i.key},{i.value})", end=" ")
+        print("")
+        print("end resize")
+        self.arr=new_arr
+
+
 
 x=HashTable()
 x.insert(5,6)
@@ -60,7 +80,7 @@ x.insert(7,88)
 print("")
 x.insert(6,333)
 print("")
-print(x.get(10))
+print(x.get(5))
 
 
 
