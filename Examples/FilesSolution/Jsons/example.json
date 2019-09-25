@@ -1,0 +1,16 @@
+{
+  "name": "Michele",
+  "shirt_color": "blue",
+  "laptops": [
+    {
+      "brand": "Lenovo",
+      "operating_system": "Ubuntu"
+    },
+    {
+      "brand": "Apple",
+      "operating_system": "OSX"
+    }
+  ],
+  "has_a_dog": false,
+  "items_on_desk": ["mug", "pen", "monitor"]
+}
